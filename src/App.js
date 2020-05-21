@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import Class from './views/ShowClass'
-import CreateClass from './views/CreateClass'
+import Workout from './views/ShowWorkout'
+import CreateWorkout from './views/CreateWorkout'
 function App() {
   return (
     <div className="App">
-      <Class/>
-      <CreateClass/>
+      <Workout/>
+      <CreateWorkout/>
     </div>
   );
 }
