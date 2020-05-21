@@ -1,35 +1,42 @@
 import React, { useState } from "react";
 import axios from "axios";
-export default function CreateWorkout(props) {
-  const [workout, setWorkout] = useState({
-    title: "",
-    short_description: "",
-    long_description: "",
-    date: "",
-    hour: "",
-    cancellation_time: "",
+export default function CreateTeacher(props) {
+  const [teacher, setTeacher] = useState({
+    name: "",
+    firstname: "",
+    email: "",
+    cel: "",
+    password: "",
+    birthdate: "",
     is_active: true,
-    teacher: "",
+    is_member:true,
     photo: "",
   });
   const inputChange = (e) => {
     const { id, value } = e.target;
-    const newWorkout = { ...workout };
-    newWorkout[id] = value;
-    setWorkout(newWorkout);
+    const newTeacher = { ...teacher };
+    newTeacher[id] = value;
+    setTeacher(newTeacher);
   };
   const clear = () => {
-    setWorkout.is_active("true");
-    setWorkout("");
+    setTeacher.name("");
+    setTeacher.firstname("");
+    setTeacher.email("");
+    setTeacher.cel("");
+    setTeacher.password("");
+    setTeacher.birthdate("");
+    setTeacher.photo("");
+    setTeacher.is_active(true);
+    setTeacher.is_member(true);
   };
-  const saveWorkout = (event) => {
+  const saveTeacher = (event) => {
     event.preventDefault();
     axios
-      .post("https://helados-deca8.firebaseio.com/class.json", {
-        workout,
+      .post("https://helados-deca8.firebaseio.com/teacher.json", {
+        teacher,
       })
       .then(() => {
-        alert("Clase creada correctamente");
+        alert("Hola Profe");
         clear();
         props.history.push("/");
       })
@@ -41,75 +48,76 @@ export default function CreateWorkout(props) {
     <div className="container">
       <div className="row justify-content-center mt-5">
         <div className="col-12 col-lg-8 col-md-8 col-sm-8">
-          <form onSubmit={saveWorkout}>
+          <form onSubmit={saveTeacher}>
             <div className="form-group">
-              <label htmlFor="">Titulo</label>
+              <label htmlFor="">Nombre:</label>
+              <input
+              type="text"
+                id="name"
+                required
+                onChange={inputChange}
+                className="form-control"
+                value={teacher.name}
+                placeholder="Nombre"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="">Apellido:</label>
+              <input
+              type="text"
+                id="firstname"
+                required
+                onChange={inputChange}
+                className="form-control"
+                value={teacher.firstname}
+                placeholder="Apellido"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="">Correo:</label>
+              <input
+                type="email"
+                id="email"
+                required
+                onChange={inputChange}
+                className="form-control"
+                value={teacher.email}
+                placeholder="Email"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="">Celular:</label>
               <input
                 type="text"
-                id="title"
-                required
                 onChange={inputChange}
                 className="form-control"
-                value={workout.title}
-              />
+                id="cel"
+                value={teacher.cel}
+                placeholder="celular"
+                required
+              ></input>
             </div>
             <div className="form-group">
-              <label htmlFor="">Descripcion Corta:</label>
-              <textarea
-                id="short_description"
-                required
+              <label htmlFor="">Contraseña</label>
+              <input
+                type="password"
                 onChange={inputChange}
                 className="form-control"
-                value={workout.shortDescription}
-                cols="30"
-                rows="2"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="">Descripcion Larga:</label>
-              <textarea
-                id="long_description"
+                id="password"
+                value={teacher.password}
+                placeholder="Contraseña"
                 required
-                onChange={inputChange}
-                className="form-control"
-                value={workout.long_description}
-                cols="30"
-                rows="10"
-              />
+              ></input>
             </div>
             <div className="form-group">
-              <label htmlFor="">Fecha:</label>
+              <label htmlFor="">Fecha de nacimiento: </label>
               <input
                 type="date"
                 onChange={inputChange}
                 className="form-control"
-                id="date"
-                value={workout.date}
-                placeholder="dd/mm/aa"
-                required
-              ></input>
-            </div>
-            <div className="form-group">
-              <label htmlFor="">Hora:</label>
-              <input
-                type="text"
-                onChange={inputChange}
-                className="form-control"
-                id="hour"
-                value={workout.hour}
-                placeholder="Hora"
-                required
-              ></input>
-            </div>
-            <div className="form-group">
-              <label htmlFor="">Tiempo de cancelacion: </label>
-              <input
-                type="text"
-                onChange={inputChange}
-                className="form-control"
-                id="cancellation_time"
-                value={workout.cancellation_time}
-                placeholder="Tiempo de cancelacion"
+                id="birthdate"
+                value={teacher.birthdate}
+                placeholder="Fecha de nacimiento"
                 required
               ></input>
             </div>
@@ -118,7 +126,7 @@ export default function CreateWorkout(props) {
               <select
                 id="is_active"
                 required
-                value={workout.is_active}
+                value={teacher.is_active}
                 onChange={inputChange}
                 className="form-control"
               >
@@ -127,25 +135,26 @@ export default function CreateWorkout(props) {
               </select>
             </div>
             <div className="form-group">
-              <label htmlFor="">Profesor:</label>
-              <input
-                type="text"
+              <label htmlFor="">¿ Eres miembro ?</label>
+              <select
+                id="is_member"
+                required
+                value={teacher.is_member}
                 onChange={inputChange}
                 className="form-control"
-                id="teacher"
-                value={workout.teacher}
-                placeholder="Profesor"
-                required
-              ></input>
+              >
+                <option value={true}>Soy miembro</option>
+                <option value={false}>No soy miembro</option>
+              </select>
             </div>
             <div className="form-group">
-              <label htmlFor="">Foto:</label>
+              <label htmlFor="">Anexar foto:</label>
               <input
-                type="text"
+                type="url"
                 onChange={inputChange}
                 className="form-control"
                 id="photo"
-                value={workout.photo}
+                value={teacher.photo}
                 placeholder="Foto"
                 required
               ></input>
@@ -159,3 +168,19 @@ export default function CreateWorkout(props) {
     </div>
   );
 }
+
+// nombre
+// apellido
+// correo
+// celular
+// contraseña
+// fecha de nacimiento
+// is-active
+// is-member
+// foto
+
+//Faltan estas tres 
+// role
+// mi-lista
+// clases-tomadas
+// clases-membresia
