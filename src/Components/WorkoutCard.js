@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ClassCard(title, short_description) {
+export default function WorkoutCard(title, short_description) {
   
   return (
     <div className="row justify-content-center mt-5">

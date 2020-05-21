@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-export default function CreateClass(props) {
+export default function CreateWorkout(props) {
   const [state, setState] = useState({
     title:"",
     short_description: "",
@@ -22,7 +22,7 @@ export default function CreateClass(props) {
     setState.is_active("true");
     setState("");
   };
-  const saveClass = (event) => {
+  const saveWorkout = (event) => {
     event.preventDefault();
     axios
       .post("https://helados-deca8.firebaseio.com/class.json", {
@@ -41,7 +41,7 @@ export default function CreateClass(props) {
     <div className="container">
       <div className="row">
         <div className="col-12 col-lg-8 col-md-8 col-sm-8">
-          <form onSubmit={saveClass}>
+          <form onSubmit={saveWorkout}>
           <div className="form-group">
               <label htmlFor="">Titulo</label>
               <textarea
