@@ -20,7 +20,7 @@ export default function CreateTeacher(props) {
   };
   const clear = () => {
     setTeacher.name("");
-    setTeacher.firstname("");
+    setTeacher.firstname="";
     setTeacher.email("");
     setTeacher.cel("");
     setTeacher.password("");

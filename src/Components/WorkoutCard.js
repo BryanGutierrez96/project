@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function WorkoutCard(title, short_description) {
+export default function WorkoutCard(props) {
   
   return (
     <div className="row justify-content-center mt-5">
@@ -11,8 +11,10 @@ export default function WorkoutCard(title, short_description) {
             className="card-img-top"
           />
           <div className="card-body">
-  <h5 className="card-title">{title}</h5>
-            <p className="card-text">{short_description}</p>
+  <h5 className="card-title">{props.titulo}</h5>
+            <p className="card-text">{props.descripcion_corta}</p>
+            <p className="card-text">{props.hora}</p>
+            <p className="card-text">{props.fecha}</p>
             <a href="" className="btn btn-primary">
               Mas info:
             </a>

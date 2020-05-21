@@ -19,13 +19,20 @@ export default function CreateWorkout(props) {
     setWorkout(newWorkout);
   };
   const clear = () => {
-    setWorkout.is_active("true");
-    setWorkout("");
+    setWorkout.title("");
+    setWorkout.shortDescription("");
+    setWorkout.long_description("");
+    setWorkout.date("");
+    setWorkout.hour("");
+    setWorkout.cancellation_time("");
+    setWorkout.is_active(true);
+    setWorkout.teacher("")
+    setWorkout.photo("");
   };
   const saveWorkout = (event) => {
     event.preventDefault();
     axios
-      .post("https://helados-deca8.firebaseio.com/class.json", {
+      .post("https://helados-deca8.firebaseio.com/workout.json", {
         workout,
       })
       .then(() => {

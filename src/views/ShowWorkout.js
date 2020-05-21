@@ -1,45 +1,137 @@
-import React, {useState, useEffect} from 'react'
-import {getWorkout} from '../services/workoutService'
-import WorkoutCard from '../Components/WorkoutCard'
-export default  function Workout (){
-  const [state, setState] = useState({
-    workouts: [],
-    workoutLength: 0,
-  });
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
+import WorkoutCard from "../Components/WorkoutCard";
+export default function Workout() {
+  const [workout, setWorkout] = useState([]);
   useEffect(() => {
-    async function fetchWorkout() {
-      const result = await getWorkout();
-      console.log(result)
-      // const workouts = Object.keys(data).map((key) => data[key]);
-  
-      // setState({ ...state, workouts });
-    }
-    fetchWorkout();
-  }, []);
-  // console.log(state);
-  
-  const showWorkout = () => {
-    return state.workouts.length > 0 ? (
-      state.workouts.map((workout, i) => (
+    Axios.get("https://helados-deca8.firebaseio.com/workout.json")
+      .then((res) => {
+        const elements = Object.entries(res.data);
+        const realData = elements.map((work) => {
+          const [id, data] = work;
+          return {
+            id,
+            ...data,
+          };
+        });
+        setWorkout(realData);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  });
+  return (
+    <div className="container">
+      {workout.map((work, i) => (
         <WorkoutCard
           key={i}
-          title={workout.title}
-          desc={workout.short_description}
+          titulo={work.title}
+          descripcion_corta={work.short_description}
+          hora={work.hour}
+          fecha={work.date}
         />
-      ))
-    ) : (
-      <h3>Cargando...</h3>
-    );
-  };
-    return (
-        <div className="App">
-          {showWorkout()}
-        </div>
-      );
+      ))}
+    </div>
+  );
 }
 
+// import React, { useEffect } from "react";
+// import axios from "axios";
+// import WorkoutCard from "../Components/WorkoutCard";
+//  export default function workout() {
 
+//   useEffect(() => {
+//     axios
+//       .get("https://helados-deca8.firebaseio.com/class.json")
+//       .then((response) => {
+//         console.log(response.data);
+//         const elements = Object.entries(response.data);
+//         const realData = elements.map((workout) => {
+//           const [id, data] = workout;
+//           return {
+//             id,
+//             ...data,
+//           };
+//         });
+//       })
+//       .catch((error) => {
+//         alert(error);
+//       });
+//   }, []);
+//   return (
+//     <div className="App">
+//       <div className="container mt-5 pt-5">
+//         <div className="row justify-content-center">
+//           <div className="col-12 col-sm-4 col-md-4 col-lg-4">
+//             <h4>Importantes</h4>
+//             {todosAlta.map((todo) => {
+//               return (
+//                 <CardTodo
+//                   nombre={todo.user}
+//                   todo={todo.todo}
+//                   prioridad={todo.prioridad}
+//                   edit={() => {
+//                     setCurrentTodo(todo);
+//                     setIsOpen(true);
+//                   }}
+//                   delete={() => {
+//                     setCurrentTodo(todo);
+//                     setIsOpenDelete(true);
+//                   }}
+//                 />
+//               );
+//             })}
+//           </div>
+//           <div className="col-12 col-sm-4 col-md-4 col-lg-4">
+//             <h4>No pasa nada</h4>
+//             {todosMedia.map((todo) => {
+//               return (
+//                 <CardTodo
+//                   nombre={todo.user}
+//                   todo={todo.todo}
+//                   prioridad={todo.prioridad}
+//                   edit={() => {
+//                     setCurrentTodo(todo);
+//                     setIsOpen(true);
+//                   }}
+//                   delete={() => {
+//                     setCurrentTodo(todo);
+//                     setIsOpenDelete(true);
+//                   }}
+//                 />
+//               );
+//             })}
+//           </div>
+//           <div className="col-12 col-sm-4 col-md-4 col-lg-4">
+//             <h4>Pueden esperar</h4>
+//             {todosBaja.map((todo) => {
+//               return (
+//                 <CardTodo
+//                   nombre={todo.user}
+//                   todo={todo.todo}
+//                   prioridad={todo.prioridad}
+//                   edit={() => {
+//                     setCurrentTodo(todo);
+//                     setIsOpen(true);
+//                   }}
+//                   delete={() => {
+//                     setCurrentTodo(todo);
+//                     setIsOpenDelete(true);
+//                   }}
+//                 />
+//               );
+//             })}
+//           </div>
+//         </div>
+//       </div>
+//       <ModalEdit open={isOpen} close={setIsOpen} todo={currentTodo} />
+//       <ModalDelete
+//         open={isOpenDelete}
+//         close={setIsOpenDelete}
+//         todo={currentTodo}
+//       />
+//     </div>
+//   );
+// }
 
-
-
-
+// export default Home;
