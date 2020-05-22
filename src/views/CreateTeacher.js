@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import axios from "axios";
 export default function CreateTeacher(props) {
   const [teacher, setTeacher] = useState({
-    name: "",
-    firstname: "",
+    first_name: "",
+    last_name: "",
     email: "",
     cel: "",
     password: "",
-    birthdate: "",
-    is_active: true,
-    is_member:true,
-    photo: "",
+    born_date: "",
+    image: "",
   });
   const inputChange = (e) => {
     const { id, value } = e.target;
@@ -18,26 +16,14 @@ export default function CreateTeacher(props) {
     newTeacher[id] = value;
     setTeacher(newTeacher);
   };
-  const clear = () => {
-    setTeacher.name("");
-    setTeacher.firstname="";
-    setTeacher.email("");
-    setTeacher.cel("");
-    setTeacher.password("");
-    setTeacher.birthdate("");
-    setTeacher.photo("");
-    setTeacher.is_active(true);
-    setTeacher.is_member(true);
-  };
   const saveTeacher = (event) => {
     event.preventDefault();
     axios
-      .post("https://helados-deca8.firebaseio.com/teacher.json", {
+      .post("https://helados-deca8.firebaseio.com/teachers.json", {
         teacher,
       })
       .then(() => {
         alert("Hola Profe");
-        clear();
         props.history.push("/");
       })
       .catch((err) => {
@@ -45,31 +31,32 @@ export default function CreateTeacher(props) {
       });
   };
   return (
-    <div className="container">
+    <div className="container text-center">
+            <h2 className="mt-5">Crear Profesor</h2>
       <div className="row justify-content-center mt-5">
         <div className="col-12 col-lg-8 col-md-8 col-sm-8">
           <form onSubmit={saveTeacher}>
             <div className="form-group">
               <label htmlFor="">Nombre:</label>
               <input
-              type="text"
-                id="name"
+                type="text"
+                id="first_name"
                 required
                 onChange={inputChange}
                 className="form-control"
-                value={teacher.name}
+                value={teacher.first_name}
                 placeholder="Nombre"
               />
             </div>
             <div className="form-group">
               <label htmlFor="">Apellido:</label>
               <input
-              type="text"
-                id="firstname"
+                type="text"
+                id="last_name"
                 required
                 onChange={inputChange}
                 className="form-control"
-                value={teacher.firstname}
+                value={teacher.last_name}
                 placeholder="Apellido"
               />
             </div>
@@ -115,46 +102,20 @@ export default function CreateTeacher(props) {
                 type="date"
                 onChange={inputChange}
                 className="form-control"
-                id="birthdate"
-                value={teacher.birthdate}
+                id="born_date"
+                value={teacher.born_date}
                 placeholder="Fecha de nacimiento"
                 required
               ></input>
             </div>
             <div className="form-group">
-              <label htmlFor="">¿ Está Activo ?</label>
-              <select
-                id="is_active"
-                required
-                value={teacher.is_active}
-                onChange={inputChange}
-                className="form-control"
-              >
-                <option value={true}>Activo</option>
-                <option value={false}>Inactivo</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="">¿ Eres miembro ?</label>
-              <select
-                id="is_member"
-                required
-                value={teacher.is_member}
-                onChange={inputChange}
-                className="form-control"
-              >
-                <option value={true}>Soy miembro</option>
-                <option value={false}>No soy miembro</option>
-              </select>
-            </div>
-            <div className="form-group">
               <label htmlFor="">Anexar foto:</label>
               <input
-                type="url"
+                type="text"
                 onChange={inputChange}
                 className="form-control"
-                id="photo"
-                value={teacher.photo}
+                id="image"
+                value={teacher.image}
                 placeholder="Foto"
                 required
               ></input>
@@ -179,7 +140,7 @@ export default function CreateTeacher(props) {
 // is-member
 // foto
 
-//Faltan estas tres 
+//Faltan estas tres
 // role
 // mi-lista
 // clases-tomadas

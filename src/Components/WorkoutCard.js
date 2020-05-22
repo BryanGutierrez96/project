@@ -15,7 +15,7 @@ export default function WorkoutCard(props) {
             <p className="card-text">{props.descripcion_corta}</p>
             <p className="card-text">{props.hora}</p>
             <p className="card-text">{props.fecha}</p>
-            <a href="" className="btn btn-primary">
+            <a href="/MoreInfo" className="btn btn-primary">
               Mas info:
             </a>
           </div>

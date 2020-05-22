@@ -8,9 +8,8 @@ export default function CreateWorkout(props) {
     date: "",
     hour: "",
     cancellation_time: "",
-    is_active: true,
     teacher: "",
-    photo: "",
+    image: "",
   });
   const inputChange = (e) => {
     const { id, value } = e.target;
@@ -18,26 +17,14 @@ export default function CreateWorkout(props) {
     newWorkout[id] = value;
     setWorkout(newWorkout);
   };
-  const clear = () => {
-    setWorkout.title("");
-    setWorkout.shortDescription("");
-    setWorkout.long_description("");
-    setWorkout.date("");
-    setWorkout.hour("");
-    setWorkout.cancellation_time("");
-    setWorkout.is_active(true);
-    setWorkout.teacher("")
-    setWorkout.photo("");
-  };
   const saveWorkout = (event) => {
     event.preventDefault();
     axios
-      .post("https://helados-deca8.firebaseio.com/workout.json", {
+      .post("https://helados-deca8.firebaseio.com/workouts.json", {
         workout,
       })
       .then(() => {
         alert("Clase creada correctamente");
-        clear();
         props.history.push("/");
       })
       .catch((err) => {
@@ -45,7 +32,8 @@ export default function CreateWorkout(props) {
       });
   };
   return (
-    <div className="container">
+    <div className="container text-center">
+      <h2 className="mt-5" >Crear nueva clase</h2>
       <div className="row justify-content-center mt-5">
         <div className="col-12 col-lg-8 col-md-8 col-sm-8">
           <form onSubmit={saveWorkout}>
@@ -121,19 +109,6 @@ export default function CreateWorkout(props) {
               ></input>
             </div>
             <div className="form-group">
-              <label htmlFor="">¿ Está Activo ?</label>
-              <select
-                id="is_active"
-                required
-                value={workout.is_active}
-                onChange={inputChange}
-                className="form-control"
-              >
-                <option value={true}>Activo</option>
-                <option value={false}>Inactivo</option>
-              </select>
-            </div>
-            <div className="form-group">
               <label htmlFor="">Profesor:</label>
               <input
                 type="text"
@@ -151,8 +126,8 @@ export default function CreateWorkout(props) {
                 type="text"
                 onChange={inputChange}
                 className="form-control"
-                id="photo"
-                value={workout.photo}
+                id="image"
+                value={workout.image}
                 placeholder="Foto"
                 required
               ></input>

@@ -11,7 +11,7 @@ export default function MoreInfo(
       <div className="col-12 col-sm-4 col-md-4 col-lg-4">
         <div className="card-header">
           <div className="card-body">
-            <p className="card-text">{long_description}</p>
+            <p className="card-text">Descripcion Larga{long_description}</p>
             <p className="card-text">{date}</p>
             <p className="card-text">{hour}</p>
             <p className="card-text">{cancellation_time}</p>
