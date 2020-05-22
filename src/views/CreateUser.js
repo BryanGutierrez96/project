@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { createUser } from "../services/signupService";
 export default function CreateUser(props) {
   const [user, setUser] = useState({
     first_name: "",
@@ -16,20 +16,14 @@ export default function CreateUser(props) {
     newUser[id] = value;
     setUser(newUser);
   };
-  const saveUser = (event) => {
-    event.preventDefault();
-    axios
-      .post("https://helados-deca8.firebaseio.com/users.json", {
-        user,
-      })
-      .then(() => {
-        alert("Bienvenid@");
-        props.history.push("/");
-      })
-      .catch((err) => {
-        return err;
-      });
-  };
+  useEffect(() => {
+    async function fetchUser() {
+      const { data } = await createUser();
+      console.log(data);
+    }
+    fetchUser();
+  }, []);
+
   return (
     <div className="container text-center">
       <h2 className="mt-5">Crear Usuario Nuevo</h2>
