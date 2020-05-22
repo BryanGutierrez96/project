@@ -7,8 +7,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./Home";
 import CreateWorkout from "./views/CreateWorkout";
 import CreateTeacher from "./views/CreateTeacher";
-import CreateUser from "./views/CreateUser"
-import MoreInfo from "./Components/MoreInfo"
+import CreateUser from "./views/CreateUser";
+import Login from "./views/Login";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,11 +16,9 @@ ReactDOM.render(
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/views/CreateWorkout" exact component={CreateWorkout} />
-        <Route path="/views/CreateTeacher" exact component={CreateTeacher}/>
-        <Route path="/views/CreateUser" exact component={CreateUser}/>
-        <Route path="/Components/MoreInfo" exact component={MoreInfo}/>
-
-
+        <Route path="/views/CreateTeacher" exact component={CreateTeacher} />
+        <Route path="/views/CreateUser" exact component={CreateUser} />
+        <Route path="/views/Login" exact component={Login} />
       </Switch>
     </BrowserRouter>
   </React.StrictMode>,
