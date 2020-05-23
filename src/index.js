@@ -5,20 +5,18 @@ import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./Home";
-import CreateWorkout from "./views/CreateWorkout";
-import CreateTeacher from "./views/CreateTeacher";
-import CreateUser from "./views/CreateUser";
 import Login from "./views/Login";
+import ShowWorkout from "./views/ShowWorkout"
+import WorkoutInfo from "./views/WorkoutInfo"
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/views/CreateWorkout" exact component={CreateWorkout} />
-        <Route path="/views/CreateTeacher" exact component={CreateTeacher} />
-        <Route path="/views/CreateUser" exact component={CreateUser} />
-        <Route path="/views/Login" exact component={Login} />
+        <Route path="/Login" exact component={Login} />
+        <Route path="/workouts" exact component={ShowWorkout} />
+        <Route path="/workout/:id" exact component={WorkoutInfo} />
       </Switch>
     </BrowserRouter>
   </React.StrictMode>,

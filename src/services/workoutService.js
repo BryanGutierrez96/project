@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const URI = "https://workoutsappcol.herokuapp.com/workout";
-const token = window.localStorage.getItem('token')
+const URI = "https://workoutsappcol.herokuapp.com/api/v1/workout";
+const token = `Bearer ${window.localStorage.getItem('token')}`
 
 export async function createWorkout(workout) {
   try {

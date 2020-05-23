@@ -1,10 +1,10 @@
 import React from "react";
 import "./App.css";
-import Login from './views/Login'
-function Home() {
+import CreateUser from './views/CreateUser'
+function Home(props) {
   return (
     <div className="App">
-      <Login/>
+      <CreateUser props={props}/>
     </div>
   );
 }

@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { createUser } from "../services/signupService";
+import React, { useState } from 'react';
+import { createUser } from '../services/signupService';
 export default function CreateUser(props) {
   const [user, setUser] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    phone_number: "",
-    password: "",
-    born_date: "",
-    profile_img: "",
+    first_name: '',
+    last_name: '',
+    email: '',
+    phone_number: '',
+    password: '',
+    born_date: '',
+    profile_img: '',
   });
   const inputChange = (e) => {
     const { id, value } = e.target;
@@ -16,20 +16,14 @@ export default function CreateUser(props) {
     newUser[id] = value;
     setUser(newUser);
   };
-  useEffect(() => {
-    async function fetchUser() {
-      const { data } = await createUser();
-      console.log(data);
-    }
-    fetchUser();
-  }, []);
+  const submit = () => createUser(user, props);
 
   return (
     <div className="container text-center">
       <h2 className="mt-5">Crear Usuario Nuevo</h2>
       <div className="row justify-content-center mt-5">
         <div className="col-12 col-lg-8 col-md-8 col-sm-8">
-          <form onSubmit={saveUser}>
+          <form>
             <div className="form-group">
               <label htmlFor="">Nombres:</label>
               <input
@@ -111,10 +105,9 @@ export default function CreateUser(props) {
                 id="profile_img"
                 value={user.profile_img}
                 placeholder="Foto"
-                required
               ></input>
             </div>
-            <button type="submit" className="btn btn-info">
+            <button type="button" onClick={submit} className="btn btn-info">
               Guardar
             </button>
           </form>
